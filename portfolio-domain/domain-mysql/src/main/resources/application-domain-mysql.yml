@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: domain-mysql
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:mysql://localhost:3308/portfolio?useUnicode=yes&characterEncoding=UTF-8&rewriteBatchedStatements=true
+    username: abcd
+    password: 1234
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      maximum-pool-size: 10
+      max-lifetime: 30000
+      connection-timeout: 3000
+    jpa:
+      database: MYSQL
+      hibernate:
+        ddl-auto: none
+      show-sql: true
+      properties:
+        hibernate:
+          format_sql: true
+  liquibase:
+    change-log: classpath:liquibase/master.xml
+    enabled: true
