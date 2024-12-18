@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: portfolio-core
+---
+spring:
+  config:
+    activate:
+      on-profile: local

@@ -1,0 +1,8 @@
+rootProject.name = 'portfolio-scott'
+
+include 'portfolio-infra'
+include 'portfolio-domain'
+include 'portfolio-core'
+include 'portfolio-core-api'
+include 'portfolio-domain:domain-redis'
+include 'portfolio-domain:domain-mysql'

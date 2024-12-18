@@ -1,0 +1,20 @@
+spring:
+  config:
+    import:
+      - classpath:/application-core.yml
+      - classpath:/application-domain-service.yml
+      - classpath:/application-domain-mysql.yml
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
