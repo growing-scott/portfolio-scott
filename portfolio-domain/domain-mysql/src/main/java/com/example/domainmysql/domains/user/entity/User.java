@@ -1,4 +1,4 @@
-package com.example.domainmysql.domain.user.entity;
+package com.example.domainmysql.domains.user.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;

@@ -2,7 +2,6 @@ spring:
   config:
     import:
       - classpath:/application-core.yml
-      - classpath:/application-domain-service.yml
       - classpath:/application-domain-mysql.yml
 
 server:

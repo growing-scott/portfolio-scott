@@ -1,6 +1,6 @@
 package com.example.portfoliocoreapi.apis.user.controller;
 
-import com.example.domainmysql.domain.user.dto.request.UserSignupReq;
+import com.example.domainmysql.domains.user.dto.UserSignupReq;
 import com.example.portfoliocoreapi.apis.user.dto.UserSignupRes;
 import com.example.portfoliocoreapi.apis.user.usecase.UserUseCase;
 import lombok.RequiredArgsConstructor;

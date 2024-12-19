@@ -1,13 +1,12 @@
-package com.example.domainmysql.domain.user.service;
+package com.example.domainmysql.domains.user.service;
 
-import com.example.domainmysql.domain.user.dto.request.UserSignupReq;
-import com.example.domainmysql.domain.user.entity.User;
-import com.example.domainmysql.domain.user.repository.UserRepository;
+import com.example.domainmysql.domains.user.dto.UserSignupReq;
+import com.example.domainmysql.domains.user.entity.User;
+import com.example.domainmysql.domains.user.repository.UserRepository;
 import com.example.portfoliocore.annotation.DomainService;
 import com.example.portfoliocore.util.EncryptionHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 

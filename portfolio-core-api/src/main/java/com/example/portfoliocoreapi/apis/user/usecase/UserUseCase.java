@@ -1,7 +1,7 @@
 package com.example.portfoliocoreapi.apis.user.usecase;
 
-import com.example.domainmysql.domain.user.dto.request.UserSignupReq;
-import com.example.domainmysql.domain.user.service.UserService;
+import com.example.domainmysql.domains.user.dto.UserSignupReq;
+import com.example.domainmysql.domains.user.service.UserService;
 import com.example.portfoliocore.annotation.UseCase;
 import lombok.RequiredArgsConstructor;
 

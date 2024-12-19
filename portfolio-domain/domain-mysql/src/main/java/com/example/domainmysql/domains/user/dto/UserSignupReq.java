@@ -1,6 +1,6 @@
-package com.example.domainmysql.domain.user.dto.request;
+package com.example.domainmysql.domains.user.dto;
 
-import com.example.domainmysql.domain.user.entity.User;
+import com.example.domainmysql.domains.user.entity.User;
 
 public record UserSignupReq(
         String loginId,
