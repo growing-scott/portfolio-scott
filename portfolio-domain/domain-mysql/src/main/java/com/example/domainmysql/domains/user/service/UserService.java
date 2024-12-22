@@ -6,7 +6,6 @@ import com.example.domainmysql.domains.user.repository.UserRepository;
 import com.example.portfoliocore.annotation.DomainService;
 import com.example.portfoliocore.util.EncryptionHelper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.UUID;
 
@@ -15,8 +14,6 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepository userRepository;
-
-    private final PasswordEncoder passwordEncoder;
 
     public Long signup(UserSignupReq userSignupReq) {
         String regNoHash = hashRegNo(userSignupReq.regNo());
@@ -35,7 +32,8 @@ public class UserService {
     }
 
     public String encryptPassword(String plainPassword) {
-        return passwordEncoder.encode(plainPassword);
+        //return passwordEncoder.encode(plainPassword);
+        return plainPassword;
     }
 
     private String hashRegNo(String regNo) {

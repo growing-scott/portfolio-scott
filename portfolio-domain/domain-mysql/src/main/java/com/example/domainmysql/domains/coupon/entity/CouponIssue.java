@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Entity
-@Table(name = "coupon_issues")
+@Table(name = "coupon_issue")
 public class CouponIssue {
 
     @Id
@@ -30,10 +30,18 @@ public class CouponIssue {
 
     private LocalDateTime dateUsed;
 
+    @Column(nullable = false)
+    private LocalDateTime dateCreated;
+
+    @Column(nullable = false)
+    private LocalDateTime dateUpdated;
+
     @Builder
     public CouponIssue(Long couponId, Long userId) {
         this.couponId = couponId;
         this.userId = userId;
         this.dateIssued = LocalDateTime.now();
+        this.dateCreated = LocalDateTime.now();
+        this.dateUpdated = LocalDateTime.now();
     }
 }

@@ -6,6 +6,8 @@ jar {
 }
 
 dependencies {
+    implementation project(':portfolio-core')
+
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     /* Redission */

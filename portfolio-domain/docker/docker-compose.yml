@@ -3,12 +3,12 @@ services:
   redis:
     container_name: portfolio-redis
     image: redis:7.2-alpine
-    command: redis-server --port 6380
+    command: redis-server --port 6379
     labels:
       - "name=redis"
       - "mode=standalone"
     ports:
-      - 6380:6380
+      - 6379:6379
   mysql:
     container_name: portfolio-mysql
     image: ubuntu/mysql:edge

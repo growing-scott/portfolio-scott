@@ -7,10 +7,13 @@ import com.example.domainmysql.domains.coupon.repository.CouponIssueRepository;
 import com.example.domainmysql.domains.coupon.repository.CouponRepository;
 import com.example.portfoliocore.annotation.DomainService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.Optional;
 
+@Slf4j
 @DomainService
 @RequiredArgsConstructor
 public class CouponIssueService {
@@ -21,6 +24,7 @@ public class CouponIssueService {
 
     @Transactional
     public Long issueCoupon(CouponIssueReq couponIssueReq) {
+        log.info("issueCoupon transactionId {}", TransactionSynchronizationManager.getCurrentTransactionName());
         Coupon coupon = findCoupon(couponIssueReq.couponId());
         coupon.issue();
         CouponIssue couponIssue = saveCouponIssue(couponIssueReq.couponId(), couponIssueReq.userId());
@@ -29,6 +33,7 @@ public class CouponIssueService {
 
     @Transactional
     public CouponIssue saveCouponIssue(long couponId, long userId) {
+        log.info("saveCouponIssue transactionId {}", TransactionSynchronizationManager.getCurrentTransactionName());
         checkAlreadyIssuance(couponId, userId);
         CouponIssue couponIssue = CouponIssue.builder()
                 .couponId(couponId)

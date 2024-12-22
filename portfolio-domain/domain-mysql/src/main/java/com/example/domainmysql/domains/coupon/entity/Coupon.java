@@ -42,6 +42,12 @@ public class Coupon {
     @Column(nullable = false)
     private LocalDateTime dateIssueEnd;
 
+    @Column(nullable = false)
+    private LocalDateTime dateCreated;
+
+    @Column(nullable = false)
+    private LocalDateTime dateUpdated;
+
     public boolean availableIssueQuantity() {
         if (totalQuantity == null) {
             return true;
@@ -79,5 +85,7 @@ public class Coupon {
         this.minAvailableAmount = minAvailableAmount;
         this.dateIssueStart = dateIssueStart;
         this.dateIssueEnd = dateIssueEnd;
+        this.dateCreated = LocalDateTime.now();
+        this.dateUpdated = LocalDateTime.now();
     }
 }

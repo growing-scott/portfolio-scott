@@ -17,17 +17,17 @@ public class CouponController {
 
     private final CouponUseCase couponUseCase;
 
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<CouponCreatedRes> createCoupon(@RequestBody CouponCreateReq couponCreateReq) {
         return new ResponseEntity<>(new CouponCreatedRes(couponUseCase.createCoupon(couponCreateReq)), HttpStatus.CREATED);
     }
 
-    @PostMapping(name = "/issues")
+    @PostMapping(path = "/issues")
     public ResponseEntity<CouponIssueRes> issueCoupon(@RequestBody CouponIssueReq couponIssueReq) {
         return new ResponseEntity<>(new CouponIssueRes(couponUseCase.issueCoupon(couponIssueReq)), HttpStatus.CREATED);
     }
 
-    @PostMapping(name = "/issues/synchronized")
+    @PostMapping(path = "/issues/synchronized")
     public ResponseEntity<CouponIssueRes> issueCouponSynchronized(@RequestBody CouponIssueReq couponIssueReq) {
         Long issueId;
         synchronized (this) {
@@ -36,10 +36,10 @@ public class CouponController {
         return new ResponseEntity<>(new CouponIssueRes(issueId), HttpStatus.CREATED);
     }
 
-    @PostMapping(name = "/issues/redis-lock")
+    @PostMapping(path = "/issues/redis-lock")
     public ResponseEntity<CouponIssueRes> issueCouponWithRedisLock(@RequestBody CouponIssueReq couponIssueReq) {
         Long issueId = 0L;
-
+        issueId = couponUseCase.issueCouponWithRedisLock(couponIssueReq, couponIssueReq.couponId());
         return new ResponseEntity<>(new CouponIssueRes(issueId), HttpStatus.CREATED);
     }
 }

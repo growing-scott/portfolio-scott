@@ -1,4 +1,4 @@
-CREATE TABLE `coupon`.`coupons`
+CREATE TABLE `coupon`
 (
     `id`                   BIGINT(20) NOT NULL AUTO_INCREMENT,
     `title`                VARCHAR(255) NOT NULL COMMENT '쿠폰명',
@@ -16,7 +16,7 @@ CREATE TABLE `coupon`.`coupons`
   DEFAULT CHARSET = utf8mb4
     COMMENT '쿠폰 정책';
 
-CREATE TABLE `coupon`.`coupon_issues`
+CREATE TABLE `coupon_issue`
 (
     `id`           BIGINT(20) NOT NULL AUTO_INCREMENT,
     `coupon_id`    BIGINT(20) NOT NULL COMMENT '쿠폰 ID',
