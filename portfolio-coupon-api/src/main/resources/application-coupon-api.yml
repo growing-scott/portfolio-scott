@@ -1,0 +1,29 @@
+spring:
+  config:
+    import:
+      - classpath:/application-core.yml
+      - classpath:/application-domain-mysql.yml
+      - classpath:/application-domain-redis.yml
+
+
+server:
+  port: 8081
+
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  data.redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:1234}
+logging:
+  level:
+    org.springframework.beans: ERROR
+    #org.springframework.transaction.interceptor: TRACE
+    org.springframework.transaction: TRACE
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql: TRACE
