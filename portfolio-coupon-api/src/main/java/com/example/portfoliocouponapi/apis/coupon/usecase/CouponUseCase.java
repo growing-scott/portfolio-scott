@@ -51,4 +51,10 @@ public class CouponUseCase {
         log.info("#### 쿠폰 발급 완료: {}, transactionId: {}", 10L, TransactionSynchronizationManager.getCurrentTransactionName());
         return 10L;
     }
+
+    public Long issueCouponRequestWithAsync(CouponIssueReq couponIssueReq, Long aLong) {
+
+
+
+    }
 }

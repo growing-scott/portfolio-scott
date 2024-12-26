@@ -42,4 +42,11 @@ public class CouponController {
         issueId = couponUseCase.issueCouponWithRedisLock(couponIssueReq, couponIssueReq.couponId());
         return new ResponseEntity<>(new CouponIssueRes(issueId), HttpStatus.CREATED);
     }
+
+    @PostMapping(path = "/issues/request")
+    public ResponseEntity<CouponIssueRes> issueCouponRequestWithAsync(@RequestBody CouponIssueReq couponIssueReq) {
+        Long issueId = 0L;
+        issueId = couponUseCase.issueCouponRequestWithAsync(couponIssueReq, couponIssueReq.couponId());
+        return new ResponseEntity<>(new CouponIssueRes(issueId), HttpStatus.CREATED);
+    }
 }
