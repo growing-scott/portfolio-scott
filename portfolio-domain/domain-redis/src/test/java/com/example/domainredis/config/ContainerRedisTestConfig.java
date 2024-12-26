@@ -8,11 +8,13 @@ public class ContainerRedisTestConfig {
 
     private static final String REDIS_IMAGE = "redis:7.2-alpine";
     private static final int REDIS_PORT = 6379;
+    private static final String REDIS_PASSWORD = "1234";
     private static final GenericContainer REDIS_CONTAINER;
 
     static {
         REDIS_CONTAINER = new GenericContainer(REDIS_IMAGE)
                 .withExposedPorts(REDIS_PORT)
+                .withEnv("REDIS_PASSWORD", REDIS_PASSWORD)
                 .withReuse(true);
         REDIS_CONTAINER.start();
     }
@@ -20,7 +22,7 @@ public class ContainerRedisTestConfig {
     @DynamicPropertySource
     private static void registerRedisProperties(DynamicPropertyRegistry registry) {
         registry.add("spring.data.redis.host", REDIS_CONTAINER::getHost);
-        registry.add("spring.data.redis.port", () -> REDIS_CONTAINER.getMappedPort(REDIS_PORT)
-                .toString());
+        registry.add("spring.data.redis.port", () -> REDIS_CONTAINER.getMappedPort(REDIS_PORT).toString());
+        registry.add("spring.data.redis.password", () -> REDIS_CONTAINER.withEnv("REDIS_PASSWORD", REDIS_PASSWORD));
     }
 }

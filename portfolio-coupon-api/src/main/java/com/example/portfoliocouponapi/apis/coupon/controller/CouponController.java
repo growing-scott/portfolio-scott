@@ -43,10 +43,17 @@ public class CouponController {
         return new ResponseEntity<>(new CouponIssueRes(issueId), HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "/issues/request")
-    public ResponseEntity<CouponIssueRes> issueCouponRequestWithAsync(@RequestBody CouponIssueReq couponIssueReq) {
+    @PostMapping(path = "/issues/request/sorted-set")
+    public ResponseEntity<CouponIssueRes> issueCouponRequestWithSortedSet(@RequestBody CouponIssueReq couponIssueReq) {
         Long issueId = 0L;
-        issueId = couponUseCase.issueCouponRequestWithAsync(couponIssueReq, couponIssueReq.couponId());
+        issueId = couponUseCase.issueCouponRequestWithAsync(couponIssueReq);
+        return new ResponseEntity<>(new CouponIssueRes(issueId), HttpStatus.CREATED);
+    }
+
+    @PostMapping(path = "/issues/request/set")
+    public ResponseEntity<CouponIssueRes> issueCouponRequestWithSet(@RequestBody CouponIssueReq couponIssueReq) {
+        Long issueId = 0L;
+        issueId = couponUseCase.issueCouponRequestWithSet(couponIssueReq);
         return new ResponseEntity<>(new CouponIssueRes(issueId), HttpStatus.CREATED);
     }
 }

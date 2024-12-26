@@ -7,6 +7,7 @@ import com.example.domainmysql.domains.coupon.service.CouponService;
 import com.example.domainmysql.domains.user.dto.UserSignupReq;
 import com.example.domainmysql.domains.user.service.UserService;
 import com.example.domainredis.annotation.DistributedLock;
+import com.example.domainredis.domains.coupon.service.RCouponIssueService;
 import com.example.portfoliocore.annotation.UseCase;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,8 @@ public class CouponUseCase {
     private final CouponService couponService;
 
     private final CouponIssueService couponIssueService;
+
+    private final RCouponIssueService rCouponIssueService;
 
     public Long createCoupon(final CouponCreateReq couponCreateReq) {
         return couponService.createCoupon(couponCreateReq);
@@ -52,9 +55,14 @@ public class CouponUseCase {
         return 10L;
     }
 
-    public Long issueCouponRequestWithAsync(CouponIssueReq couponIssueReq, Long aLong) {
+    public Long issueCouponRequestWithAsync(CouponIssueReq couponIssueReq) {
+        rCouponIssueService.couponIssueRequest(couponIssueReq.couponId(), couponIssueReq.userId(), "테스트");
 
+        return 10L;
+    }
 
-
+    public Long issueCouponRequestWithSet(CouponIssueReq couponIssueReq) {
+        rCouponIssueService.issueCouponRequestWithSet(couponIssueReq.couponId(), couponIssueReq.userId());
+        return 10L;
     }
 }
