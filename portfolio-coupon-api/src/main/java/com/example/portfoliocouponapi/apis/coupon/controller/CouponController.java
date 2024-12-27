@@ -56,4 +56,11 @@ public class CouponController {
         issueId = couponUseCase.issueCouponRequestWithSet(couponIssueReq);
         return new ResponseEntity<>(new CouponIssueRes(issueId), HttpStatus.CREATED);
     }
+
+    @PostMapping(path = "/issues/request/set-cache")
+    public ResponseEntity<CouponIssueRes> issueCouponRequestWithSetAndCache(@RequestBody CouponIssueReq couponIssueReq) {
+        Long issueId = 0L;
+        issueId = couponUseCase.issueCouponRequestWithSetAndCache(couponIssueReq);
+        return new ResponseEntity<>(new CouponIssueRes(issueId), HttpStatus.CREATED);
+    }
 }

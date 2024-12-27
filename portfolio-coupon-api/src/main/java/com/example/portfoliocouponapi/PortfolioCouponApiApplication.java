@@ -5,8 +5,10 @@ import com.example.domainredis.DomainRedisConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Import;
 
+@EnableCaching
 @Import({DomainMySqlConfiguration.class, DomainRedisConfiguration.class})
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class PortfolioCouponApiApplication {

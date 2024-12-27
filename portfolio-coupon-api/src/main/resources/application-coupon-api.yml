@@ -4,12 +4,18 @@ spring:
       - classpath:/application-core.yml
       - classpath:/application-domain-mysql.yml
       - classpath:/application-domain-redis.yml
-
+  cache:
+    type: redis
 
 server:
   port: 8081
 
-
+logging:
+  level:
+    org.springframework.beans: ERROR
+    org.springframework.transaction: TRACE
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql: TRACE
 
 ---
 spring:
@@ -20,10 +26,10 @@ spring:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
     password: ${REDIS_PASSWORD:1234}
-logging:
-  level:
-    org.springframework.beans: ERROR
-    #org.springframework.transaction.interceptor: TRACE
-    org.springframework.transaction: TRACE
-    org.hibernate.SQL: debug
-    org.hibernate.type.descriptor.sql: TRACE
+  cache:
+    type: redis
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true

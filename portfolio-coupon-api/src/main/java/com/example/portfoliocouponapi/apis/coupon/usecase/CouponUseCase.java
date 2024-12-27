@@ -2,6 +2,7 @@ package com.example.portfoliocouponapi.apis.coupon.usecase;
 
 import com.example.domainmysql.domains.coupon.dto.CouponCreateReq;
 import com.example.domainmysql.domains.coupon.dto.CouponIssueReq;
+import com.example.domainmysql.domains.coupon.entity.Coupon;
 import com.example.domainmysql.domains.coupon.service.CouponIssueService;
 import com.example.domainmysql.domains.coupon.service.CouponService;
 import com.example.domainmysql.domains.user.dto.UserSignupReq;
@@ -9,8 +10,10 @@ import com.example.domainmysql.domains.user.service.UserService;
 import com.example.domainredis.annotation.DistributedLock;
 import com.example.domainredis.domains.coupon.service.RCouponIssueService;
 import com.example.portfoliocore.annotation.UseCase;
+import com.example.portfoliocouponapi.apis.coupon.dto.CouponCache;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
@@ -30,6 +33,13 @@ public class CouponUseCase {
 
     public Long createCoupon(final CouponCreateReq couponCreateReq) {
         return couponService.createCoupon(couponCreateReq);
+    }
+
+    @Cacheable(value = "coupon", cacheManager = "couponCacheManager")
+    public CouponCache getCouponCache(long couponId) {
+        Coupon coupon = couponService.findCoupon(couponId);
+        log.info("coupon {}", coupon);
+        return new CouponCache(coupon);
     }
 
     @Transactional
@@ -65,4 +75,14 @@ public class CouponUseCase {
         rCouponIssueService.issueCouponRequestWithSet(couponIssueReq.couponId(), couponIssueReq.userId());
         return 10L;
     }
+
+    public Long issueCouponRequestWithSetAndCache(CouponIssueReq couponIssueReq) {
+        CouponCache coupon = getCouponCache(couponIssueReq.couponId());
+        coupon.checkIssuableCoupon();
+
+        rCouponIssueService.issueCouponRequestWithSet(couponIssueReq.couponId(), couponIssueReq.userId());
+        return 10L;
+    }
+
+
 }
